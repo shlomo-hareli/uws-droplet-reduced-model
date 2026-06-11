@@ -1,142 +1,186 @@
-UWS Droplet Reduced Model (Tabulated Framework)
+# UWS Droplet Reduced Model (Tabulated Framework)
 
-Tabulated Reduced Model for Urea Decomposition in Urea–Water-Solution (UWS) Sprays for CFD Applications
+**Tabulated Reduced Model for Urea Decomposition in Urea–Water-Solution (UWS) Sprays for CFD Applications**
 
-Manuscript status: Submitted to Chemical Engineering Journal
+**Manuscript status:** Submitted to *Chemical Engineering Journal*
 
-Author: Shlomo Hareli
-Karlsruhe Institute of Technology (KIT)
-Institute of Technical Thermodynamics
+**Author:** Shlomo Hareli  
+**Affiliation:** Karlsruhe Institute of Technology (KIT), Institute of Technical Thermodynamics
 
-Project Overview
+---
 
-This repository provides a tabulated reduced-order model for simulation of urea–water-solution (UWS) droplet evaporation and decomposition in selective catalytic reduction (SCR) systems.
+## Project Overview
 
-The model replaces expensive detailed droplet chemistry with a surrogate formulation based on a progress-variable representation and interpolation in precomputed simulation data.
+This repository provides a **tabulated reduced-order model** for simulation of **urea–water-solution (UWS) droplet evaporation and decomposition** in selective catalytic reduction (SCR) systems.
 
-It is designed for integration into Euler–Lagrange CFD spray solvers.
+The model replaces expensive detailed droplet chemistry with a **surrogate formulation** based on a **progress-variable representation** and **interpolation in precomputed simulation data**. It is designed for seamless integration into **Euler–Lagrange CFD spray solvers**.
 
-Scientific Objective
+---
 
-The objective is to reproduce the following processes:
+## Scientific Objective
 
-Droplet heating and evaporation
-Urea decomposition pathways
-Ammonia formation
-Solid residue formation
-Coupled heat and mass transfer
+The model reproduces the following coupled processes:
 
-while significantly reducing computational cost compared to full chemistry simulations.
+- **Droplet heating and evaporation**
+- **Urea decomposition pathways**
+- **Ammonia formation**
+- **Solid residue formation**
+- **Coupled heat and mass transfer**
 
-Model Formulation
+All while **significantly reducing computational cost** compared to full chemistry simulations.
+
+---
+
+## Model Formulation
+
+### Thermochemical State Representation
 
 The thermochemical state is represented as:
 
-Psi = Psi(phi, T0, r0)
+$$\Psi = \Psi(\phi, T_0, r_0)$$
 
 where:
+- **φ** = progress variable
+- **T₀** = ambient temperature
+- **r₀** = initial droplet radius
 
-phi = progress variable
-T0 = ambient temperature
-r0 = initial droplet radius
+### System Evolution
 
-The system evolves as:
+The system evolves according to:
 
-dphi/dt = phi_dot(phi, T0, r0)
+$$\frac{d\phi}{dt} = \dot{\phi}(\phi, T_0, r_0)$$
 
-Time integration:
+**Time integration scheme:**
 
-phi(t+dt) = phi(t) + phi_dot * dt
+$$\phi(t+\Delta t) = \phi(t) + \dot{\phi} \cdot \Delta t$$
 
-All other variables are reconstructed from phi.
+All other variables are **reconstructed from φ**.
 
-State Vector (24 Variables)
+---
 
-0 phi Progress variable
-1 dphi_dt Source term
-2 d2eq Normalized droplet diameter
-3 md Droplet mass
-4 temp Temperature
-5 rho Density
-6 w_h2o Water mass fraction
-7 w_ur_s Urea solid
-8 w_ur_l Urea liquid
-9 w_hnco Isocyanic acid
-10 w_biu_l Biuret liquid
-11 w_biu_s Biuret solid
-12 w_triu Triuret
-13 w_cya_s Cyanuric acid
-14 w_amd_s Ammelide
-15 e_h2o Evaporation rate H2O
-16 e_nh3 Evaporation rate NH3
-17 e_cya Evaporation rate CYA
-18 e_amd Evaporation rate AMD
-19 e_ur Evaporation rate Urea
-20 e_hnco Evaporation rate HNCO
-21 qdot Heat flux
-22 t Time
-23 mdot Mass loss rate
+## State Vector (24 Variables)
 
-Parameter Space
+| Index | Variable | Description |
+|-------|----------|-------------|
+| 0 | **φ** | Progress variable |
+| 1 | **dφ/dt** | Source term |
+| 2 | **d₂ₑq** | Normalized droplet diameter |
+| 3 | **mₐ** | Droplet mass |
+| 4 | **T** | Temperature |
+| 5 | **ρ** | Density |
+| 6 | **w_H₂O** | Water mass fraction |
+| 7 | **w_UR_S** | Urea solid |
+| 8 | **w_UR_L** | Urea liquid |
+| 9 | **w_HNCO** | Isocyanic acid |
+| 10 | **w_BIU_L** | Biuret liquid |
+| 11 | **w_BIU_S** | Biuret solid |
+| 12 | **w_TRIU** | Triuret |
+| 13 | **w_CYA_S** | Cyanuric acid |
+| 14 | **w_AMD_S** | Ammelide |
+| 15 | **ė_H₂O** | Evaporation rate H₂O |
+| 16 | **ė_NH₃** | Evaporation rate NH₃ |
+| 17 | **ė_CYA** | Evaporation rate CYA |
+| 18 | **ė_AMD** | Evaporation rate AMD |
+| 19 | **ė_UR** | Evaporation rate Urea |
+| 20 | **ė_HNCO** | Evaporation rate HNCO |
+| 21 | **q̇** | Heat flux |
+| 22 | **t** | Time |
+| 23 | **ṁ** | Mass loss rate |
 
-Temperature: 400 – 650 K
-Droplet radius: 2.5e-6 – 1.05e-4 m
-Progress variable: 0 – 1
+---
 
-Numerical Method
-Bilinear interpolation in (T, r) space
-Progress-variable reconstruction
-Explicit time integration
-Model Features
-Fully tabulated reduced-order droplet chemistry model
-Captures evaporation and decomposition
-Compatible with Euler–Lagrange CFD solvers
-Deterministic (no stochastic sampling)
-Efficient evaluation for spray-scale simulations
-Validity and Assumptions
-Spherical droplets
-Homogeneous phases
-Dilute spray regime
-No droplet–droplet interaction
-Valid only within tabulated range
-Validation Concept
+## Parameter Space
 
-Validated against detailed droplet simulations:
+The model is valid within the following parametric ranges:
 
-Evaporation dynamics
-Temperature evolution
-Ammonia formation
-Solid formation
+- **Temperature:** 400 – 650 K
+- **Droplet radius:** 2.5 × 10⁻⁶ – 1.05 × 10⁻⁴ m
+- **Progress variable:** 0 – 1
 
-Accuracy depends on table resolution.
+---
 
-Computational Efficiency
+## Numerical Method
 
-The model replaces stiff chemistry integration with:
+- **Interpolation:** Bilinear interpolation in (T, r) space
+- **Reconstruction:** Progress-variable reconstruction
+- **Time integration:** Explicit time integration scheme
 
-Interpolation operations
-Single ODE in phi
+---
 
-resulting in a significant reduction in computational cost.
+## Model Features
 
-Funding
+- **Fully tabulated** reduced-order droplet chemistry model
+- **Captures** evaporation and decomposition mechanisms
+- **Compatible** with Euler–Lagrange CFD solvers
+- **Deterministic** (no stochastic sampling)
+- **Efficient** evaluation for spray-scale simulations
 
-German Research Foundation (DFG)
-SFB TRR 150 (TP-B07), Project No. 237267381
+---
 
-Publication
+## Validity and Assumptions
 
-Manuscript submitted to: Chemical Engineering Journal
+The model is valid under the following assumptions:
 
-Title: Tabulated Reduced Model for Urea Decomposition in Urea–Water-Solution (UWS) Sprays for CFD Applications
+- **Spherical droplets** (geometric assumption)
+- **Homogeneous phases** (composition uniformity)
+- **Dilute spray regime** (low liquid volume fraction)
+- **No droplet–droplet interaction** (Lagrangian decoupling)
+- **Valid only within tabulated parameter ranges**
 
-Reproducibility
-Load precomputed table
-Choose T0 and r0
-Interpolate
-Integrate phi
-Reconstruct variables
-Contact
+---
 
-Karlsruhe Institute of Technology (KIT)
+## Validation Concept
+
+The model is **validated against detailed droplet simulations** for:
+
+- Evaporation dynamics
+- Temperature evolution
+- Ammonia formation
+- Solid formation
+
+**Accuracy depends on table resolution and interpolation method.**
+
+---
+
+## Computational Efficiency
+
+The model achieves significant performance gains by replacing **stiff chemistry integration** with:
+
+- **Interpolation operations** (lookup in precomputed table)
+- **Single ODE in φ** (reduced model dimension)
+
+This results in a **dramatic reduction in computational cost** relative to full chemistry solvers.
+
+---
+
+## Funding
+
+**German Research Foundation (DFG)**  
+*SFB TRR 150* (TP-B07), Project No. 237267381
+
+---
+
+## Publication
+
+**Manuscript:** Submitted to *Chemical Engineering Journal*
+
+**Title:** Tabulated Reduced Model for Urea Decomposition in Urea–Water-Solution (UWS) Sprays for CFD Applications
+
+---
+
+## Reproducibility Workflow
+
+1. Load precomputed table
+2. Choose T₀ and r₀
+3. Interpolate table at (T₀, r₀)
+4. Integrate ODE in φ
+5. Reconstruct all 24 state variables
+
+---
+
+## Contact
+
+**Karlsruhe Institute of Technology (KIT)**  
 Institute of Technical Thermodynamics
+
+**Author:** Shlomo Hareli
