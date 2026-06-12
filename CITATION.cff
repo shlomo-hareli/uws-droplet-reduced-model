@@ -6,7 +6,19 @@ type: software
 authors:
   - family-names: Hareli
     given-names: Shlomo
-    affiliation: Karlsruhe Institute of Technology (KIT)
+    affiliation: "Karlsruhe Institute of Technology (KIT)"
+    email: shlomo.hareli@kit.edu
+    orcid: https://orcid.org/0000-0000-0000-0000
+
+  - family-names: Bykov
+    given-names: Viatcheslav
+    affiliation: "Karlsruhe Institute of Technology (KIT)"
+    email: viatcheslav.bykov@kit.edu
+
+  - family-names: Maas
+    given-names: Ulrich
+    affiliation: "Karlsruhe Institute of Technology (KIT)"
+    email: ulrich.maas@kit.edu
 
 repository-code: https://github.com/ChunkanYu/Stochastic-Modeling-PaSR-for-Combustion
 
