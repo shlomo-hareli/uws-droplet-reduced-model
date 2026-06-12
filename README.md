@@ -179,6 +179,8 @@ R_GRID = [2.5e-06, 7.5e-06, 1.25e-05, 1.75e-05, 2.25e-05, 2.75e-05, 3.25e-05, 3.
 ### Accuracy
 
 - The reduced model reproduces the detailed simulations with a typical deviation of **≤ 5%**.
+- Accuracy can be improved by increasing grid resolution.
+
 
 ---
 
