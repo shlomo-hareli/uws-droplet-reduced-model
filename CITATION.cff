@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: "UWS Droplet Reduced Model (Tabulated Framework)"
+message: "Please cite the associated manuscript when using this software."
+type: software
+
+authors:
+  - family-names: Hareli
+    given-names: Shlomo
+    affiliation: Karlsruhe Institute of Technology (KIT)
+
+repository-code: https://github.com/ChunkanYu/Stochastic-Modeling-PaSR-for-Combustion
+
+license: MIT
+
+abstract: >
+  Tabulated reduced-order model for urea-water-solution droplet evaporation
+  and decomposition for CFD spray simulations.
+
+keywords:
+  - multiphase flow
+  - CFD
+  - SCR systems
+  - reduced-order modeling
+  - tabulated chemistry
