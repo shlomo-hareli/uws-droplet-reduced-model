@@ -13,7 +13,7 @@
 
 This repository provides a **tabulated reduced-order model** for simulation of **urea–water-solution (UWS) droplet evaporation and decomposition** in selective catalytic reduction (SCR) systems.
 
-The model replaces expensive detailed droplet chemistry with a **surrogate formulation** based on a **progress-variable representation** and **interpolation in precomputed simulation data**. It is designed for seamless integration into **Euler–Lagrange CFD spray solvers**.
+The model replaces expensive detailed droplet chemistry with a **surrogate formulation** based on a **progress-variable representation** and **interpolation in precomputed simulation data**. It is[...]
 
 ---
 
@@ -150,6 +150,35 @@ The model achieves significant performance gains by replacing **stiff chemistry 
 - **Single ODE in φ** (reduced model dimension)
 
 This results in a **dramatic reduction in computational cost** relative to full chemistry solvers.
+
+---
+
+## Table Resolution and Parameter Space (Droplet Model)
+
+The droplet reduced-order model is constructed from a precomputed database of detailed simulations stored in tabulated form. The accuracy of the interpolation depends on the resolution of the underlying parameter grids.
+
+### Temperature Grid
+
+```
+T_GRID = [400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650] K
+```
+
+### Radius Grid
+
+```
+R_GRID = [2.5e-06, 7.5e-06, 1.25e-05, 1.75e-05, 2.25e-05, 2.75e-05, 3.25e-05, 3.75e-05, 4.25e-05, 4.75e-05, 5.25e-05, 5.75e-05, 6.25e-05, 6.75e-05, 7.25e-05, 7.75e-05, 8.25e-05, 8.75e-05, 9.25e-05, 9.75e-05, 1.02e-04, 1.05e-04] m
+```
+
+### Initial Conditions
+
+- **Initial droplet temperature:** 300 K
+- **Initial composition:**
+  - 67.5 wt% water
+  - 32.5 wt% solid urea
+
+### Accuracy
+
+- The reduced model reproduces the detailed simulations with a typical deviation of **≤ 5%**.
 
 ---
 
